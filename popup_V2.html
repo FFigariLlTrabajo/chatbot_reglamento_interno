@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+<script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+    createChat({
+        webhookUrl: 'https://udelima.app.n8n.cloud/webhook/6b8df708-49cb-48d1-80e1-914b378351ff/chat'
+    });
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .chat-window-wrapper .chat-window-toggle {
+            display: none !important;
+        }
+        .chat-window-wrapper .chat-window {
+            width: 100vw;
+            height: 90vh;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="openPopup">Abrir Chat</button>
+    <script>
+        const openBtn = document.getElementById('openPopup');
+        openBtn.onclick = () => {
+            document.getElementsByClassName('chat-window-toggle')[0].click();
+        };
+
+        // Detect click outside chat to close
+        document.addEventListener('click', function (e) {
+            const chatWindow = document.querySelector('.chat-window-wrapper .chat-window');
+            if (chatWindow && chatWindow.style.display !== 'none') {
+                if (!chatWindow.contains(e.target) && e.target !== openBtn) {
+                    // Close chat by simulating toggle button click
+                    document.getElementsByClassName('chat-window-toggle')[0].click();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
